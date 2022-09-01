@@ -17,4 +17,36 @@ export default class MatchesController {
       return next(err);
     }
   }
+
+  async save(req: Request, res: Response, next: NextFunction) {
+    try {
+      const create = await this.matchesService.save(req.body);
+
+      return res.status(201).json(create);
+    } catch (err) {
+      return next(err);
+    }
+  }
+
+  async change(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const result = await this.matchesService.change(Number(id));
+
+      return res.status(200).json(result);
+    } catch (err) {
+      return next(err);
+    }
+  }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const result = await this.matchesService.update(req.body, Number(id));
+
+      return res.status(200).json(result);
+    } catch (err) {
+      return next(err);
+    }
+  }
 }
