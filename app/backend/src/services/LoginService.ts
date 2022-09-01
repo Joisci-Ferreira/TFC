@@ -1,11 +1,18 @@
 import * as Bcryptjs from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
 import Users from '../database/models/users';
+import { validate } from '../utils/Token';
 import IError from '../interfaces/IError';
 import IUser from '../interfaces/IUser';
 
 type Login = {
   email: string;
   passwordDb: string;
+};
+
+type LoginJWT = {
+  email: string;
+  password: string;
 };
 
 export interface ILoginService {
@@ -40,6 +47,27 @@ export default class LoginService implements ILoginService {
 
     const user = { id, username, role, email };
     return user;
+  }
+
+  async getLogin(data: LoginJWT): Promise<IUser | undefined> {
+    const { email: emailDb, password: passwordDb } = data;
+    const result = await this.usersModel.findOne({
+      where: {
+        email: emailDb,
+      },
+    });
+    const { id, username, role, email, password } = result as Users;
+    const validated = await LoginService.validatePassword(passwordDb, password);
+
+    if (validated) {
+      const user = { id, username, role, email };
+      return user;
+    }
+  }
+
+  static async validate(token: string): Promise<jwt.JwtPayload> {
+    const result = await validate(token);
+    return result;
   }
 
   static async validatePassword(passwordDb: string, password: string): Promise<boolean> {

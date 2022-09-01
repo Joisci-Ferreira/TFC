@@ -5,7 +5,7 @@ type Login = {
   passwordDb: string;
 };
 
-const generate = (paylod: Login): string => {
+export const generate = (paylod: Login): string => {
   const { email, passwordDb: password } = paylod;
 
   const secret = process.env.JWT_SECRET || 'jwt_secret';
@@ -20,4 +20,9 @@ const generate = (paylod: Login): string => {
   return token;
 };
 
-export default generate;
+export const validate = (token: string): jwt.JwtPayload => {
+  const secret = process.env.JWT_SECRET || 'jwt_secret';
+  const decode = jwt.verify(token, secret);
+
+  return decode as jwt.JwtPayload;
+};
