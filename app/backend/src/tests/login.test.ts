@@ -55,7 +55,31 @@ describe('Testando a rota "/login"', () => {
    expect(chaiHttpResponse.body).to.have.a.property('token')
   });
 
+  it('Verifica se a rota "/login" não permite o acesso sem informar o email', async () => {
+    const request = loginData ;
+    request.email = '';
+    chaiHttpResponse = await chai
+    .request(app)
+    .post('/login').send(request);
+    
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body).to.be.eql({ message: 'All fields must be filled' });
+  });
+  
+  it('Verifica se a rota "POST /login" não permite o acesso sem informar a senha', async () => {
+    const request = { ...loginData };
+    request.password = '';
+    chaiHttpResponse = await chai
+    .request(app)
+    .post('/login').send(request);
+    
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body).to.be.eql({ message: 'All fields must be filled' });
+  });
+
   it('Seu sub-teste', () => {
   expect(true).to.be.eq(true);
   });
 }); 
+
+

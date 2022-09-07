@@ -19,6 +19,6 @@ export default class ValidationMatches {
       });
     }
 
-    return next;
+    return next();
   }
 }

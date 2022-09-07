@@ -14,7 +14,8 @@ export default class ErrorMidd {
         .json({ message: (err as IError).message });
     }
 
-    return res.status(Errors.INTERNAL_SERVER_ERROR)
-      .json({ message: 'Internal Server Error' });
+    return res.status(Errors.INTERNAL_SERVER_ERROR).json(
+      { message: 'Internal Server Error' },
+    );
   }
 }

@@ -1,4 +1,4 @@
-type Team = {
+type team = {
   teamName: string,
 };
 
@@ -9,6 +9,6 @@ export default interface IMatches {
   awayTeam: number,
   awayTeamGoals: number,
   inProgress: boolean,
-  teamHome?: Team,
-  teamAway?: Team,
+  teamHome?: team,
+  teamAway?: team,
 }
