@@ -4,14 +4,14 @@ import IError from '../interfaces/IError';
 
 export default class ErrorMidd {
   static async validate(
-    err: unknown,
+    err: IError,
     _req: Request,
     res: Response,
     _next: NextFunction,
   ) {
     if ((err as IError).code) {
-      return res.status((err as IError).code)
-        .json({ message: (err as IError).message });
+      return res.status((err).code)
+        .json({ message: (err).message });
     }
 
     return res.status(Errors.INTERNAL_SERVER_ERROR).json(

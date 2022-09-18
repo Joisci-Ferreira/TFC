@@ -22,7 +22,11 @@ export const generate = (paylod: Login): string => {
 
 export const validate = (token: string): jwt.JwtPayload => {
   const secret = process.env.JWT_SECRET || 'jwt_secret';
-  const decode = jwt.verify(token, secret);
+  try {
+    const decode = jwt.verify(token, secret);
 
-  return decode as jwt.JwtPayload;
+    return decode as jwt.JwtPayload;
+  } catch (err) {
+    return ({ code: 401, message: 'Token must be a valid token' });
+  }
 };

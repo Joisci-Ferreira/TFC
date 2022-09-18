@@ -21,11 +21,12 @@ const mock = {
   password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
 }
 
+const loginData = { email: 'admin@admin.com', password: 'secret_admin' };
+
 describe('Testando a rota "/login"', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
-  const loginData = { email: 'admin@admin.com', password: 'secret_admin' };
 
   let chaiHttpResponse: Response;
 
@@ -65,21 +66,8 @@ describe('Testando a rota "/login"', () => {
     expect(chaiHttpResponse.status).to.be.equal(400);
     expect(chaiHttpResponse.body).to.be.eql({ message: 'All fields must be filled' });
   });
-  
-  it('Verifica se a rota "POST /login" não permite o acesso sem informar a senha', async () => {
-    const request = { ...loginData };
-    request.password = '';
-    chaiHttpResponse = await chai
-    .request(app)
-    .post('/login').send(request);
-    
-    expect(chaiHttpResponse.status).to.be.equal(400);
-    expect(chaiHttpResponse.body).to.be.eql({ message: 'All fields must be filled' });
-  });
 
   it('Seu sub-teste', () => {
   expect(true).to.be.eq(true);
   });
 }); 
-
-
