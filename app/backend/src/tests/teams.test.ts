@@ -39,10 +39,6 @@ describe('Testando a rota "/teams"', () => {
     expect(chaiHttpResponse.body).to.be.eql(allTeams);
     expect(chaiHttpResponse.status).to.be.equal(200);
    });
-
-  it('Seu sub-teste', () => {
-    expect(true).to.be.eq(true);
-  });
 });
 
 describe('Testando a rota "/teams/:id"', () => {

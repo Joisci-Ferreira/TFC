@@ -1,4 +1,4 @@
-const homeLeaderboard = [
+const leaderboardHome = [
   {
     "name": "Santos",
     "totalPoints": 9,
@@ -193,4 +193,5 @@ const homeLeaderboard = [
   }
 ];
 
-export default homeLeaderboard;
+export default leaderboardHome;
+  
