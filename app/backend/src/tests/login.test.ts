@@ -159,34 +159,4 @@ describe('Testando a rota "GET /login/validate"', () => {
   });
 });
 
- /* describe('Quando não permite o acesso sem informar a senha', () => {
-
-    let chaiHttpResponse: Response;
-
-    before(async () => {
-      sinon
-        .stub(Users, "findOne")
-        .resolves( mock as Users);
-   });
-
-    after(()=>{
-      (Users.findOne as sinon.SinonStub).restore();
-   })
-
-    it('Verifica se retorna status 400', async () => {
-      chaiHttpResponse = await chai
-      .request(app)
-      .post('/login').send({ email: 'admin@admin.com' });
-
-     expect(chaiHttpResponse.status).to.be.equal(400);
-   });
-
-    it('Verifica se retorna a mensagem "All fields must filled"', async () => {
-      chaiHttpResponse = await chai
-      .request(app)
-      .post('/login').send({ email: 'admin@admin.com' });
-
-     expect(chaiHttpResponse.body.message).to.be.equal('All fields must be filled');
-   }); 
-  }); */
-
+ 
